@@ -26,4 +26,5 @@ driver = webdriver.Chrome(options=chrome_options)
 if __name__ == '__main__':
     #y_comb_log(driver)
     #scrollingSearchPage(driver)
+
     CollectInfo(driver, 'https://www.workatastartup.com/companies/ply-health')
