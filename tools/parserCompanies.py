@@ -48,6 +48,16 @@ def InfoCompany(driver):
     except:info_company = 'N/A'
     return info_company
 
+def JobPosts(driver):
+    try:
+        LIST_JOB_NAME = []
+        for job_name in driver.find_elements(By.CLASS_NAME, 'job-name'):
+            job_name = job_name.text
+            LIST_JOB_NAME+=[job_name]
+
+    except:job_name = 'N/A'
+    return LIST_JOB_NAME 
+
 def CollectInfo(driver, url):
     driver.get(url);time.sleep(3)
 
@@ -57,17 +67,33 @@ def CollectInfo(driver, url):
     founder_company = FounderComapny(driver)
     #tech_company = TechCompany(driver)
     social_names, link = SocialLink(driver)
+    jobs_name = JobPosts(driver)
+    
+    border = '-'*40
 
     print(f'{RED}Company Name:{RESET}\t{GREEN}{company_name}{RESET}')
+    print(border)
     print(f'{RED}Company Title:{RESET}\t{GREEN}{title_company}{RESET}')
+    print(border)
     print(f'{RED}About Company:{RESET}\t{GREEN}{about_company}{RESET}')
+    print(border)
     print(f'{RED}Founders Company:{RESET}\n{GREEN}{founder_company}{RESET}')
     try:
+        print(border)
         number_persone = 0
         for social in social_names:
             linkedin = link[number_persone]
             person_count = number_persone+1
             print(f'{RED}Founder[{person_count}] {RESET}{GREEN}{social}:{RESET}\t{YELLOW}{linkedin}{RESET}')
             number_persone+=1
+        print(border)
     except Exception as err:print(f'Error: {err}')
-    #print(f'{RED}Tech Company:{RESET}\t{GREEN}{tech_company}{RESET}')
+    try:
+        number_post = 0
+        for job_name in jobs_name:
+            job_count = number_post+1
+            if 'Interview Process' in job_name:job_name = job_name.split('Interview Process')[0].strip()
+            print(f'{RED}Job Post [{job_count}]{RESET}\t{GREEN}{job_name}{RESET}')
+            number_post+=1
+        print(border)
+    except Exception as err:print(f'Error: {err}')
