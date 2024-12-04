@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from tools.colors import RED, GREEN, RESET
 from tools.recordResult import checkDir, PATH_COMPANIES_FILE
 from tools.statusScrapy import statusParser
+from tools.parserCompanies import CollectInfo
 import os, csv
 
 LIST_LINK_IN_DOC = []
@@ -34,7 +35,8 @@ def scrapyLinks(driver):
             with open(PATH_COMPANIES_FILE, 'a+') as file:
                 write = csv.writer(file)
                 write.writerow([link, 'Y-Combinator'])
-                print(f'\t{GREEN}[{number_link}]{RESET} {RED}{link}{RESET}')
-        #else:statusParser(False)
+                print(f'{GREEN}[{number_link}]{RESET} {RED}{link}{RESET}')
+                CollectInfo(driver, link)
+                print('\n')
 
 

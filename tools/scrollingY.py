@@ -8,8 +8,6 @@ def scrollingSearchPage(driver):
     last_height = driver.execute_script("return document.body.scrollHeight")
     number_scrolling = 0
     while True:
-        #if parser() == False:
-        #    break
 
         number_scrolling+=1
         print(f'Scrolling: [{number_scrolling}]')
@@ -27,5 +25,4 @@ def scrollingSearchPage(driver):
         last_height = new_height
 
 
-        scrapyLinks(driver)
-       
+               

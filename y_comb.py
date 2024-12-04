@@ -6,6 +6,7 @@ from tools.login_y import login as y_comb_log
 from tools.scrollingY import scrollingSearchPage
 from tools.scrapyLinks import scrapyLinks
 from tools.parserCompanies import CollectInfo
+from tools.recordResult import checkDir
 
 
 profile_chrome = 'ProfileChrome'
@@ -24,7 +25,7 @@ driver = webdriver.Chrome(options=chrome_options)
 
 
 if __name__ == '__main__':
-    #y_comb_log(driver)
-    #scrollingSearchPage(driver)
+    y_comb_log(driver)
+    scrollingSearchPage(driver)
+    scrapyLinks(driver)
 
-    CollectInfo(driver, 'https://www.workatastartup.com/companies/ply-health')

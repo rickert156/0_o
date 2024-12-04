@@ -77,7 +77,8 @@ def CollectInfo(driver, url):
     jobs_name, jobs_info = JobPosts(driver)
     
     border = '-'*40
-
+    print(url)
+    print(border)
     print(f'{RED}Company Name:{RESET}\t{GREEN}{company_name}{RESET}')
     print(border)
     print(f'{RED}Company Title:{RESET}\t{GREEN}{title_company}{RESET}')
