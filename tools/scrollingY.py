@@ -1,9 +1,7 @@
 import time
 from tools.scrapyLinks import scrapyLinks
-from tools.statusScrapy import parser
 
 def scrollingSearchPage(driver):
-    global WORK
     # Получаем начальную высоту страницы
     last_height = driver.execute_script("return document.body.scrollHeight")
     number_scrolling = 0
@@ -19,7 +17,6 @@ def scrollingSearchPage(driver):
         new_height = driver.execute_script("return document.body.scrollHeight")
         
         if new_height == last_height:
-            input('...')
             break  # Если высота страницы не меняется, это означает, что прокрутка достигла низа.
         # Обновляем высоту, если мы еще не в самом низу
         last_height = new_height

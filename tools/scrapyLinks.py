@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from tools.colors import RED, GREEN, RESET
 from tools.recordResult import checkDir, PATH_COMPANIES_FILE
-from tools.statusScrapy import statusParser
 from tools.parserCompanies import CollectInfo
 import os, csv
 

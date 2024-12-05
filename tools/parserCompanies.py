@@ -52,6 +52,8 @@ def JobPosts(driver):
     try:
         LIST_JOB_NAME = []
         LIST_JOB_INFO = []
+        LIST_JOB_LINK = []
+
         for job_name in driver.find_elements(By.CLASS_NAME, 'job-name'):
             job_name = job_name.text
             LIST_JOB_NAME+=[job_name]
@@ -59,11 +61,17 @@ def JobPosts(driver):
         for job_info in driver.find_elements(By.CSS_SELECTOR, 'div[class*="mr-2 text-sm"]'):
             job_info = job_info.text
             LIST_JOB_INFO+=[job_info]
+        for job_link in driver.find_elements(By.TAG_NAME, 'a'):
+            href = job_link.get_attribute('href')
+            if href:
+                if 'https://www.workatastartup.com/jobs/' in href:
+                    LIST_JOB_LINK+=[href]
 
     except:
         LIST_JOB_NAME = 'N/A'
         LIST_JOB_INFO = 'N/A'
-    return LIST_JOB_NAME, LIST_JOB_INFO
+        LIST_JOB_LINK = 'N/A'
+    return LIST_JOB_NAME, LIST_JOB_INFO, LIST_JOB_LINK
 
 def CollectInfo(driver, url):
     driver.get(url);time.sleep(3)
@@ -74,7 +82,7 @@ def CollectInfo(driver, url):
     founder_company = FounderComapny(driver)
     #tech_company = TechCompany(driver)
     social_names, link = SocialLink(driver)
-    jobs_name, jobs_info = JobPosts(driver)
+    jobs_name, jobs_info, jobs_link = JobPosts(driver)
     
     border = '-'*40
     print(url)
@@ -100,10 +108,11 @@ def CollectInfo(driver, url):
         number_post = 0
         for job_name in jobs_name:
             job_info = jobs_info[number_post]
+            job_link = jobs_link[number_post]
             job_info = job_info.replace('\n', ' | ')
             job_count = number_post+1
             if 'Interview Process' in job_name:job_name = job_name.split('Interview Process')[0].strip()
-            print(f'{RED}Job Post [{job_count}]{RESET}\t{GREEN}{job_name}\n{job_info}{RESET}')
+            print(f'{RED}Job Post [{job_count}]{RESET}\t{GREEN}{job_name}: {job_link}\n{job_info}{RESET}\n')
             number_post+=1
         print(border)
     except Exception as err:print(f'Error: {err}')
