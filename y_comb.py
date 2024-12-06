@@ -25,7 +25,9 @@ driver = webdriver.Chrome(options=chrome_options)
 
 
 if __name__ == '__main__':
-    y_comb_log(driver)
-    scrollingSearchPage(driver)
-    scrapyLinks(driver)
+    #y_comb_log(driver)
+    #scrollingSearchPage(driver)
+    #scrapyLinks(driver)
+    checkDir()
+    CollectInfo(driver, 'https://www.workatastartup.com/companies/siphox-health')
 

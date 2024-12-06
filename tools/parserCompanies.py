@@ -2,6 +2,8 @@ from tools.colors import RED, GREEN, YELLOW, RESET
 from selenium.webdriver.common.by import By
 import csv, os, time
 
+from tools.recordResult import COMPANY_DATA_PATH 
+
 def CompanyName(driver):
     try:company_name = driver.find_element(By.CLASS_NAME, 'company-name').text
     except:company_name = 'N/A'
@@ -19,6 +21,24 @@ def SiteCompany(driver):
         site = domain_block.find_element(By.TAG_NAME, 'a').text
     except:site = 'N/A'
     return site
+
+def CategoryAndNumberOfEmployeesCompany(driver):
+    try:
+        employees = 'N/A'
+        category = ''
+        categories = []
+        for info in driver.find_elements(By.CLASS_NAME, 'detail-label'):
+            if ',' not in info.text:
+                if 'people' in info.text:
+                    employees = info.text
+                else:
+                    categories+=[info.text]
+
+        for c in categories:
+            category = f'{category}{c}'
+
+    except:pass
+    return employees, category
 
 def AboutCompany(driver):
     try:about_company = driver.find_element(By.CSS_SELECTOR, 'div[class*="prose col-span-11"]').text
@@ -75,6 +95,7 @@ def CollectInfo(driver, url):
 
     company_name = CompanyName(driver)
     site = SiteCompany(driver)
+    employees, category = CategoryAndNumberOfEmployeesCompany(driver)
     title_company = TitleCompany(driver)
     about_company = AboutCompany(driver)
     social_names, link = SocialLink(driver)
@@ -117,13 +138,15 @@ def CollectInfo(driver, url):
             
             job_count = number_post+1
             if 'Interview Process' in job_name:job_name = job_name.split('Interview Process')[0].strip()
-            print(f'{RED}Job Post [{job_count}]{RESET}\t{GREEN}{job_name}: {job_link}\n{job_info}{RESET}\n')
+            print(f'{RED}Job Post [{job_count}]{RESET}\t{GREEN}{job_name}: {job_link}\n{job_info}{RESET}')
             
-            with open('testing.csv', 'a+') as file:
+            with open(COMPANY_DATA_PATH, 'a+') as file:
                 write = csv.writer(file)
-                write.writerow([job_name, company_name, site, job_location, job_experience, job_rest, job_info, job_link, title_company, about_company, social_link])
+                write.writerow([job_name, company_name, site, job_location, job_experience, job_rest, employees, category, job_info, job_link, title_company, about_company, social_link, 'Y-Combinator'])
             
             number_post+=1
         print(border)
     except Exception as err:print(f'Error: {err}')
+    print(f'{RED}Employees:{RESET}\t{GREEN}{employees}{RESET}')
+    print(f'{RED}Category:{RESET}\t{GREEN}{category}{RESET}')
 

@@ -22,8 +22,7 @@ def scrapyLinks(driver):
 
     for links in driver.find_elements(By.TAG_NAME, 'a'):
         link = links.get_attribute('href')
-        if link and '/companies/' in link:
-            if '/website' in link:link = link.split('/website')[0]
+        if link and '/companies/' in link and '/website' not in link:
             SET_LINK.add(link)
 
     number_link = 0

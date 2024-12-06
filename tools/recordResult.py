@@ -18,6 +18,6 @@ def checkDir():
     if not os.path.exists(COMPANY_DATA_PATH):
         with open(COMPANY_DATA_PATH, 'a') as file:
             write = csv.writer(file)
-            write.writerow(['URL Y Combinator', 'Company', 'Title', 'About', 'Fonders', 'Links Founders', 'Job Posts', 'Job Info', 'Link Job Post'])
+            write.writerow(['Job Title', 'Company', 'Site', 'Location', 'Experience', 'Additional information', 'Employees', 'Category', 'Information', 'Link Post', 'Title Company', 'About Company', 'Link Founders', 'Platform'])
 
 
