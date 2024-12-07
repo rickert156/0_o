@@ -10,9 +10,9 @@ def readFileLink():
     global PATH_COMPANIES_FILE, LIST_LINK_IN_DOC
 
     with open(PATH_COMPANIES_FILE, 'r') as file:
-        for row in csv.DictReader(file):
-            email = row['Link']
-            LIST_LINK_IN_DOC+=[email]
+        for row in file.readlines():
+            link = row.strip()
+            LIST_LINK_IN_DOC+=[link]
 
 def scrapyLinks(driver):
     global LIST_LINK_IN_DOC, PATH_COMPANIES_FILE
@@ -26,13 +26,16 @@ def scrapyLinks(driver):
             SET_LINK.add(link)
 
     number_link = 0
+    
+
+    
+
     for link in SET_LINK:
-        readFileLink()
         number_link+=1
         if link not in LIST_LINK_IN_DOC:
+            readFileLink()
             with open(PATH_COMPANIES_FILE, 'a+') as file:
-                write = csv.writer(file)
-                write.writerow([link, 'Y-Combinator'])
+                file.write(f'{link}\n')
                 print(f'{GREEN}[{number_link}]{RESET} {RED}{link}{RESET}')
                 CollectInfo(driver, link)
                 print('\n')

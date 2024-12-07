@@ -12,8 +12,7 @@ def checkDir():
     if not os.path.exists(PATH_COMPANIES_FILE):
         os.makedirs(BASE_COMPANIES_DIR)
         with open(PATH_COMPANIES_FILE, 'a') as file:
-            write = csv.writer(file)
-            write.writerow(['Link', 'Source'])
+            file.write('')
     
     if not os.path.exists(COMPANY_DATA_PATH):
         with open(COMPANY_DATA_PATH, 'a') as file:

@@ -22,8 +22,6 @@ chrome_options.add_argument("start-maximized")
 driver = webdriver.Chrome(options=chrome_options)
 
 
-
-
 if __name__ == '__main__':
     y_comb_log(driver)
     scrollingSearchPage(driver)
