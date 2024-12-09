@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 import csv, os, time
 
 from tools.recordResult import COMPANY_DATA_PATH 
+from sql.createDB import recordDataSQL, createTable
 
 def CompanyName(driver):
     try:company_name = driver.find_element(By.CLASS_NAME, 'company-name').text
@@ -91,6 +92,8 @@ def JobPosts(driver):
     return LIST_JOB_NAME, LIST_JOB_INFO, LIST_JOB_LINK
 
 def CollectInfo(driver, url):
+    createTable()
+    
     driver.get(url);time.sleep(3)
 
     company_name = CompanyName(driver)
@@ -143,10 +146,12 @@ def CollectInfo(driver, url):
             with open(COMPANY_DATA_PATH, 'a+') as file:
                 write = csv.writer(file)
                 write.writerow([job_name, company_name, site, job_location, job_experience, job_rest, employees, category, job_info, job_link, title_company, about_company, social_link, 'Y-Combinator'])
-            
+            if "'" in title_company:title_company = title_company.replace("'", "")
+            if "'" in about_company:about_company = about_company.replace("'", "")
+            recordDataSQL(job_name, company_name, site, job_location, job_experience, job_rest, employees, category, job_link, title_company, about_company, social_link, 'Y-Combinator')
             number_post+=1
         print(border)
     except Exception as err:print(f'Error: {err}')
     print(f'{RED}Employees:{RESET}\t{GREEN}{employees}{RESET}')
     print(f'{RED}Category:{RESET}\t{GREEN}{category}{RESET}')
-
+    
