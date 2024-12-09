@@ -4,7 +4,7 @@ import csv, os, time
 
 from tools.recordResult import COMPANY_DATA_PATH 
 from tools.email_report import send_email
-from sql.createDB import recordDataSQL, createTable
+from sql.createDB import recordDataSQLPost, recordDataSQLFounders, createTable
 
 def CompanyName(driver):
     try:company_name = driver.find_element(By.CLASS_NAME, 'company-name').text
@@ -126,6 +126,11 @@ def CollectInfo_Y_Combinator(driver, url):
             number_persone+=1
         social_link = social_link.strip()
         print(f'{social_link}\n{border}')
+
+        ### Чуть переписать парсер founders + поправить пару багов
+        recordDataSQLFounders(first_name, last_name, about_persone, linkedin, data_check_post)
+
+
     except Exception as err:print(f'Error: {err}')
     try:
         jobs_new_list = []
@@ -161,8 +166,8 @@ def CollectInfo_Y_Combinator(driver, url):
             
             if "'" in about_company:about_company = about_company.replace("'", "")
             
-
-            recordDataSQL(job_name, company_name, site, job_location, job_experience, job_type, employees, category, about_job, job_link, about_company, 'Y-Combinator', data_check_post)
+            recordDataSQLPost(job_name, company_name, site, job_location, job_experience, job_type, employees, category, about_job, job_link, about_company, 'Y-Combinator', data_check_post)
+            
             send_email(job_name, company_name, job_link, 'Y-Combinator')
             number_post+=1
         print(border)

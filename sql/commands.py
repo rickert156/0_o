@@ -1,4 +1,4 @@
-create_table_post = """
+create_table_job_post = """
 CREATE TABLE IF NOT EXISTS job_posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     job_title TEXT,
@@ -17,4 +17,13 @@ CREATE TABLE IF NOT EXISTS job_posts (
 )
 """
 
-
+create_table_founders = """
+CREATE TABLE IF NOT EXISTS founders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT,
+    last_name TEXT,
+    about_persone TEXT,
+    linkedin TEXT,
+    data_check_post TEXT
+)
+"""
