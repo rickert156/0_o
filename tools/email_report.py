@@ -19,7 +19,7 @@ def send_email(job_title, company_name, link_post, platform):
     msg = MIMEMultipart()
     msg['From'] = sender
     msg['To'] = send_to
-    msg['Subject'] = 'New Job Post!'
+    msg['Subject'] = f'New Job Post: {company_name}'
     msg.attach(MIMEText(email_text, 'plain'))
 
     try:
