@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from tools.colors import RED, GREEN, RESET, YELLOW
+from tools.colors import RED, GREEN, RESET
 from email_login import sender, password
 
 def send_email(job_title, company_name, link_post, platform):
@@ -27,9 +27,8 @@ def send_email(job_title, company_name, link_post, platform):
         server.login(sender, password)
         server.sendmail(sender, send_to, msg.as_string())
         server.quit()
-        print(f'{YELLOW}[+] Letter sent {RESET}\n')
+        print(f'{GREEN}[+] Letter sent {RESET}')
     except Exception as err:
-        print(f'{RED}[x] Error: {err}{RESET}\n')
+        print(f'{RED}[x] Error: {err}{RESET}')
 
-#send_email('Company Title', 'Company Name', 'https://google.com', 'Y-Combinater')
-
+send_email('Company Title', 'Company Name', 'https://google.com', 'Y-Combinater')

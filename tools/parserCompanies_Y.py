@@ -150,10 +150,10 @@ def CollectInfo_Y_Combinator(driver, url):
             if "'" in title_company:title_company = title_company.replace("'", "")
             if "'" in about_company:about_company = about_company.replace("'", "")
             recordDataSQL(job_name, company_name, site, job_location, job_experience, job_rest, employees, category, job_link, title_company, about_company, social_link, 'Y-Combinator')
-            send_email(job_title, company_name, job_link, 'Y-Combinator')
+            send_email(job_name, company_name, job_link, 'Y-Combinator')
             number_post+=1
         print(border)
-    except Exception as err:print(f'Error: {err}')
+    except Exception as err:print(f'Error block Jobs: {err}')
     print(f'{RED}Employees:{RESET}\t{GREEN}{employees}{RESET}')
     print(f'{RED}Category:{RESET}\t{GREEN}{category}{RESET}')
     
