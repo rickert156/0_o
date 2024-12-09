@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from tools.login_y import login as y_comb_log
 from tools.scrollingY import scrollingSearchPage
 from tools.scrapyLinks import scrapyLinks
-from tools.parserCompanies import CollectInfo
+from tools.parserCompanies_Y import CollectInfo_Y_Combinator
 from tools.recordResult import checkDir
 
 

@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 import csv, os, time
 
 from tools.recordResult import COMPANY_DATA_PATH 
+from tools.email_report import send_email
 from sql.createDB import recordDataSQL, createTable
 
 def CompanyName(driver):
@@ -91,7 +92,7 @@ def JobPosts(driver):
         LIST_JOB_LINK = 'N/A'
     return LIST_JOB_NAME, LIST_JOB_INFO, LIST_JOB_LINK
 
-def CollectInfo(driver, url):
+def CollectInfo_Y_Combinator(driver, url):
     createTable()
     
     driver.get(url);time.sleep(3)
@@ -149,6 +150,7 @@ def CollectInfo(driver, url):
             if "'" in title_company:title_company = title_company.replace("'", "")
             if "'" in about_company:about_company = about_company.replace("'", "")
             recordDataSQL(job_name, company_name, site, job_location, job_experience, job_rest, employees, category, job_link, title_company, about_company, social_link, 'Y-Combinator')
+            send_email(job_title, company_name, job_link, 'Y-Combinator')
             number_post+=1
         print(border)
     except Exception as err:print(f'Error: {err}')

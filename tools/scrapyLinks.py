@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from tools.colors import RED, GREEN, RESET
 from tools.recordResult import checkDir, PATH_COMPANIES_FILE
-from tools.parserCompanies import CollectInfo
+from tools.parserCompanies_Y import CollectInfo_Y_Combinator
 import os, csv
 
 LIST_LINK_IN_DOC = []
@@ -37,7 +37,7 @@ def scrapyLinks(driver):
             with open(PATH_COMPANIES_FILE, 'a+') as file:
                 file.write(f'{link}\n')
                 print(f'{GREEN}[{number_link}]{RESET} {RED}{link}{RESET}')
-                CollectInfo(driver, link)
+                CollectInfo_Y_Combinator(driver, link)
                 print('\n')
 
 
