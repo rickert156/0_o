@@ -26,5 +26,5 @@ if __name__ == '__main__':
     #y_comb_log(driver)
     #scrollingSearchPage(driver)
     #scrapyLinks(driver)
-    
-    CollectInfo_Y_Combinator(driver, 'https://www.workatastartup.com/companies/offdeal')
+    checkDir() 
+    CollectInfo_Y_Combinator(driver, 'https://www.workatastartup.com/companies/eight-sleep')

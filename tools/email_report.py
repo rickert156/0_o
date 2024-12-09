@@ -2,7 +2,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from tools.colors import RED, GREEN, RESET, YELLOW
-from email_login import sender, password
+from email_login import sender, password, send_to
 
 def send_email(job_title, company_name, link_post, platform):
     email_text = f"""
@@ -14,7 +14,6 @@ def send_email(job_title, company_name, link_post, platform):
     Company Name: {company_name}
     Link Job Post: {link_post}
     """
-    send_to = 'maksimnegulyaev@gmail.com'
 
     msg = MIMEMultipart()
     msg['From'] = sender

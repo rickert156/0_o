@@ -4,7 +4,7 @@ BASE_COMPANIES_DIR = 'Companies'
 BASE_COMPANIES_FILE = 'all_companies.csv'
 PATH_COMPANIES_FILE = f'{BASE_COMPANIES_DIR}/{BASE_COMPANIES_FILE}'
 
-COMPANY_DATA_FILE = 'all_data.csv'
+COMPANY_DATA_FILE = 'data_post.csv'
 COMPANY_DATA_PATH = f'{BASE_COMPANIES_DIR}/{COMPANY_DATA_FILE}'
 
 def checkDir():
@@ -17,6 +17,5 @@ def checkDir():
     if not os.path.exists(COMPANY_DATA_PATH):
         with open(COMPANY_DATA_PATH, 'a') as file:
             write = csv.writer(file)
-            write.writerow(['Job Title', 'Company', 'Site', 'Location', 'Experience', 'Additional information', 'Employees', 'Category', 'Information', 'Link Post', 'Title Company', 'About Company', 'Link Founders', 'Platform'])
-
+            write.writerow(['Job Title', 'Company', 'Site', 'Location', 'Experience', 'Job Type', 'Employees', 'Category', 'About Job', 'Link Post', 'About Company', 'Platform', 'Date/Time'])
 

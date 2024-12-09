@@ -6,15 +6,14 @@ CREATE TABLE IF NOT EXISTS job_posts (
     site TEXT,
     location TEXT,
     experience TEXT,
-    additional_information TEXT,
+    job_type TEXT,
     employees TEXT,
     category_company TEXT,
-    information TEXT,
+    about_job TEXT,
     link_post TEXT,
-    title_company TEXT,
     about_company TEXT,
-    link_founders TEXT,
-    platform TEXT
+    platform TEXT,
+    data_check_post TEXT
 )
 """
 

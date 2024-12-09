@@ -13,15 +13,15 @@ def createTable():
     except Exception as err:print(f'Error: {err}')
 
 
-def recordDataSQL(job_title, company, site, location, experience, additional_information, employees, category_company, link_post, title_company, about_company, link_founders, platform):
+def recordDataSQL(job_title, company, site, location, experience, job_type, employees, category_company, about_job, link_post, about_company, platform, data_check_post):
     global SQL_BASE
 
     conn = sqlite3.connect(SQL_BASE)
     cursor = conn.cursor()
     
     record_sql_post = f'''
-    INSERT INTO job_posts (job_title, company, site, location, experience, additional_information, employees, category_company, link_post, title_company, about_company, link_founders, platform)
-    VALUES ('{job_title}', '{company}', '{site}', '{location}', '{experience}', '{additional_information}', '{employees}', '{category_company}', '{link_post}', '{title_company}', '{about_company}', '{link_founders}', '{platform}');
+    INSERT INTO job_posts (job_title, company, site, location, experience, job_type, employees, category_company, about_job, link_post, about_company, platform, data_check_post)
+    VALUES ('{job_title}', '{company}', '{site}', '{location}', '{experience}', '{job_type}', '{employees}', '{category_company}', '{about_job}', '{link_post}', '{about_company}', '{platform}', '{data_check_post}');
 '''
     try:cursor.execute(record_sql_post)
     except sqlite3.DatabaseError as err:print(f'Error: {err}')
