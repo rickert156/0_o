@@ -43,20 +43,16 @@ def AboutCompany(driver):
     except:about_company = 'N/A'
     return about_company
 
-def SocialLink(driver):
+#Вот это переписать нормально!!!
+def FoundersCompany(driver):
     try:
-        LIST_NAME = []
-        SOCIAL_LINK = []
-        for name in driver.find_elements(By.CLASS_NAME, 'mb-1.font-medium'):
-            name = name.text
-            LIST_NAME+=[name]
+        block_founders = driver.find_element(By.CLASS_NAME, 'border-t.border-gray-200.pb-2.pt-4')
+    except:block_founders = 'N/A'
+    return block_founders
 
-        for link in driver.find_elements(By.TAG_NAME, 'a'):
-            link = link.get_attribute('href')
-            if 'https://www.linkedin.com/in/' in link:
-                SOCIAL_LINK+=[link]
-    except:name = 'N/A'
-    return LIST_NAME, SOCIAL_LINK
+
+#До сюда
+
 
 def InfoCompany(driver):
     try:info_company = driver.find_element(By.CSS_SELECTOR, '"flex flex-wrap gap-1"')
@@ -106,7 +102,11 @@ def CollectInfo_Y_Combinator(driver, url):
     site = SiteCompany(driver)
     employees, category = CategoryAndNumberOfEmployeesCompany(driver)
     about_company = AboutCompany(driver)
-    social_names, link = SocialLink(driver)
+
+    #Переписать(выше)!
+    founders = FoundersCompany(driver) 
+    #!!!
+
     jobs_name, jobs_info, jobs_link = JobPosts(driver)
 
     border = '-'*40
@@ -114,21 +114,33 @@ def CollectInfo_Y_Combinator(driver, url):
     print(f'{RED}Company Name:{RESET}\t{GREEN}{company_name}{RESET} |  {YELLOW}{site}{RESET}')
     print(border)
     print(f'{RED}About Company:{RESET}\t{GREEN}{about_company}{RESET}')
+    
     try:
         print(border)
-        number_persone = 0
-        social_link = ''
-        for social in social_names:
-            linkedin = link[number_persone]
-            social_link = f'{social_link}{linkedin}\n'
-            person_count = number_persone+1
-            print(f'{RED}Founder[{person_count}] {RESET}{GREEN}{social}{RESET}')
-            number_persone+=1
-        social_link = social_link.strip()
-        print(f'{social_link}\n{border}')
+        
+        number_founder = 0
+        for founder in founders.find_elements(By.CLASS_NAME, 'mb-4'):
+            number_founder+=1
+            
+            full_name = founder.text.split('\n')[0]
+            about_persone = founder.text.split('\n')[1]
+            
+            first_name = full_name.split(' ')[0]
+            last_name = full_name.split(' ')[-1]
+            
+            try:
+                linkedin = founder.find_element(By.TAG_NAME, 'a')
+                linkedin = linkedin.get_attribute('href')
+            except:linkedin = 'N/A'
 
-        ### Чуть переписать парсер founders + поправить пару багов
-        recordDataSQLFounders(first_name, last_name, about_persone, linkedin, data_check_post)
+            data_check_post = time.strftime("%d/%m/%Y %H:%m")
+
+            print(f'{RED}[{number_founder}]{RESET} {GREEN}{full_name}\nFirst Name: {first_name} | Last Name: {last_name}{RESET} {linkedin}\n{GREEN}{about_persone}{RESET}')
+
+            recordDataSQLFounders(first_name, last_name, about_persone, linkedin, data_check_post)
+        
+        print(f'{border}')
+
 
 
     except Exception as err:print(f'Error: {err}')

@@ -28,7 +28,7 @@ def recordDataSQLPost(job_title, company, site, location, experience, job_type, 
     try:cursor.execute(record_sql_post)
     except sqlite3.DatabaseError as err:print(f'Error: {err}')
     else:
-        print('Record Data')
+        print('Record Post')
         conn.commit()
     
     cursor.close()
@@ -42,3 +42,10 @@ def recordDataSQLFounders(first_name, last_name, about_persone, linkedin, data_c
     INSERT INTO founders (first_name, last_name, about_persone, linkedin, data_check_post)
     VALUES ('{first_name}', '{last_name}', '{about_persone}', '{linkedin}', '{data_check_post}')
     '''
+    try:cursor.execute(record_sql_founders)
+    except sqlite3.DatabaseError as err:print(f'Error: {err}')
+    else:
+        print('Record Founders')
+        conn.commit()
+    cursor.close()
+    conn.close()
