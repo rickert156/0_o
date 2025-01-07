@@ -4,4 +4,4 @@ __pycache__
 *.csv
 *.db
 *.txt
-email_login.py
+config.py
