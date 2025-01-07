@@ -27,4 +27,4 @@ def Checker(check_time:str=None, script:str=None):
             
     except KeyboardInterrupt:print('\nВыход из программы...')
 
-Checker(check_time="18:38", script="y_comb.py")
+Checker(check_time="9:00", script="y_comb.py")

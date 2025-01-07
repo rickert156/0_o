@@ -45,16 +45,10 @@ def AboutCompany(driver):
     except:about_company = 'N/A'
     return about_company
 
-#Вот это переписать нормально!!!
 def FoundersCompany(driver):
-    try:
-        block_founders = driver.find_element(By.CLASS_NAME, 'border-t.border-gray-200.pb-2.pt-4')
+    try:block_founders = driver.find_element(By.CLASS_NAME, 'border-t.border-gray-200.pb-2.pt-4')
     except:block_founders = 'N/A'
     return block_founders
-
-
-#До сюда
-
 
 def InfoCompany(driver):
     try:info_company = driver.find_element(By.CSS_SELECTOR, '"flex flex-wrap gap-1"')
@@ -105,9 +99,7 @@ def CollectInfo_Y_Combinator(driver, url):
     employees, category = CategoryAndNumberOfEmployeesCompany(driver)
     about_company = AboutCompany(driver)
 
-    #Переписать(выше)!
     founders = FoundersCompany(driver) 
-    #!!!
 
     jobs_name, jobs_info, jobs_link = JobPosts(driver)
 
@@ -135,14 +127,13 @@ def CollectInfo_Y_Combinator(driver, url):
                 linkedin = linkedin.get_attribute('href')
             except:linkedin = 'N/A'
 
-            data_check_post = time.strftime("%d/%m/%Y %H:%m")
+            data_check_post = time.strftime("%d/%m/%Y %H:%M")
 
             print(f'{RED}[{number_founder}]{RESET} {GREEN}{full_name}\nFirst Name: {first_name} | Last Name: {last_name}{RESET} {linkedin}\n{GREEN}{about_persone}{RESET}')
 
             recordDataSQLFounders(first_name, last_name, about_persone, linkedin, company_name, data_check_post)
             
-            #Уведомление в Slack
-            #Slack_Founders_Info(company_name=company_name, first_name=first_name, last_name=last_name, linkedin=linkedin, about_persone=about_persone)
+            Slack_Founders_Info(company_name=company_name, first_name=first_name, last_name=last_name, linkedin=linkedin, about_persone=about_persone)
 
         print(f'{border}')
 
@@ -174,7 +165,7 @@ def CollectInfo_Y_Combinator(driver, url):
             
             print(f'\n{RED}About Job:{RESET}\t{GREEN}{about_job}{RESET}\n')
             
-            data_check_post = time.strftime("%d/%m/%Y %H:%m")
+            data_check_post = time.strftime("%d/%m/%Y %H:%M")
             
 
             with open(COMPANY_DATA_PATH, 'a+') as file:
@@ -185,9 +176,8 @@ def CollectInfo_Y_Combinator(driver, url):
             
             recordDataSQLPost(job_name, company_name, site, job_location, job_experience, job_type, employees, category, about_job, job_link, about_company, 'Y-Combinator', data_check_post)
             
-            #Уведомление в Slack
-            #Slack_Job_Post_Info(company_name=company_name, job_name=job_name, about_job=about_job, category_company=category, link_job=job_link)
-            
+            Slack_Job_Post_Info(company_name=company_name, job_name=job_name, about_job=about_job, category_company=category, link_job=job_link)
+        
             
             send_email(job_name, company_name, job_link, 'Y-Combinator')
             number_post+=1
