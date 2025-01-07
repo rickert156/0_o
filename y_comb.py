@@ -23,8 +23,6 @@ driver = webdriver.Chrome(options=chrome_options)
 
 
 if __name__ == '__main__':
-    #y_comb_log(driver)
-    #scrollingSearchPage(driver)
-    #scrapyLinks(driver)
-    checkDir() 
-    CollectInfo_Y_Combinator(driver, 'https://www.workatastartup.com/companies/eight-sleep')
+    y_comb_log(driver)
+    scrollingSearchPage(driver)
+    scrapyLinks(driver)
