@@ -6,6 +6,8 @@ from tools.recordResult import COMPANY_DATA_PATH
 from tools.email_report import send_email
 from sql.createDB import recordDataSQLPost, recordDataSQLFounders, createTable
 
+from tools.slack import Slack_Founders_Info, Slack_Job_Post_Info
+
 def CompanyName(driver):
     try:company_name = driver.find_element(By.CLASS_NAME, 'company-name').text
     except:company_name = 'N/A'
@@ -137,8 +139,11 @@ def CollectInfo_Y_Combinator(driver, url):
 
             print(f'{RED}[{number_founder}]{RESET} {GREEN}{full_name}\nFirst Name: {first_name} | Last Name: {last_name}{RESET} {linkedin}\n{GREEN}{about_persone}{RESET}')
 
-            recordDataSQLFounders(first_name, last_name, about_persone, linkedin, data_check_post)
-        
+            recordDataSQLFounders(first_name, last_name, about_persone, linkedin, company_name, data_check_post)
+            
+            #Уведомление в Slack
+            #Slack_Founders_Info(company_name=company_name, first_name=first_name, last_name=last_name, linkedin=linkedin, about_persone=about_persone)
+
         print(f'{border}')
 
 
@@ -179,6 +184,10 @@ def CollectInfo_Y_Combinator(driver, url):
             if "'" in about_company:about_company = about_company.replace("'", "")
             
             recordDataSQLPost(job_name, company_name, site, job_location, job_experience, job_type, employees, category, about_job, job_link, about_company, 'Y-Combinator', data_check_post)
+            
+            #Уведомление в Slack
+            #Slack_Job_Post_Info(company_name=company_name, job_name=job_name, about_job=about_job, category_company=category, link_job=job_link)
+            
             
             send_email(job_name, company_name, job_link, 'Y-Combinator')
             number_post+=1

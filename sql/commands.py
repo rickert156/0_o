@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS founders (
     last_name TEXT,
     about_persone TEXT,
     linkedin TEXT,
+    company_name TEXT,
     data_check_post TEXT
 )
 """

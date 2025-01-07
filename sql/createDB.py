@@ -34,13 +34,13 @@ def recordDataSQLPost(job_title, company, site, location, experience, job_type, 
     cursor.close()
     conn.close()
 
-def recordDataSQLFounders(first_name, last_name, about_persone, linkedin, data_check_post):
+def recordDataSQLFounders(first_name, last_name, about_persone, linkedin, company_name, data_check_post):
     conn = sqlite3.connect(SQL_BASE)
     cursor = conn.cursor()
 
     record_sql_founders = f'''
-    INSERT INTO founders (first_name, last_name, about_persone, linkedin, data_check_post)
-    VALUES ('{first_name}', '{last_name}', '{about_persone}', '{linkedin}', '{data_check_post}')
+    INSERT INTO founders (first_name, last_name, about_persone, linkedin, company_name, data_check_post)
+    VALUES ('{first_name}', '{last_name}', '{about_persone}', '{linkedin}', '{company_name}', '{data_check_post}')
     '''
     try:cursor.execute(record_sql_founders)
     except sqlite3.DatabaseError as err:print(f'Error: {err}')
