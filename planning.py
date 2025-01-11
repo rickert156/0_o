@@ -22,9 +22,12 @@ def Checker(check_time:str=None, script:str=None):
             current_time = time.strftime("%H:%M")
             if check_time == current_time:
                 os.system(f'source venv/bin/activate && python3 {script}')
+                current_time = None
+                break
             print(f'Текущее время {current_time}. Задача запланирована на {check_time}')
             time.sleep(60)
             
     except KeyboardInterrupt:print('\nВыход из программы...')
 
-Checker(check_time="9:00", script="y_comb.py")
+while True:
+    Checker(check_time="19:51", script="y_comb.py")

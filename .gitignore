@@ -1,7 +1,2 @@
 ProfileChrome/
 venv/
-__pycache__
-*.csv
-*.db
-*.txt
-config.py

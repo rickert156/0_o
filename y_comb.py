@@ -23,6 +23,8 @@ driver = webdriver.Chrome(options=chrome_options)
 
 
 if __name__ == '__main__':
-    y_comb_log(driver)
-    scrollingSearchPage(driver)
-    scrapyLinks(driver)
+    while True:
+        y_comb_log(driver)
+        scrollingSearchPage(driver)
+        scrapyLinks(driver)
+

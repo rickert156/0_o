@@ -6,7 +6,7 @@ from tools.recordResult import COMPANY_DATA_PATH
 from tools.email_report import send_email
 from sql.createDB import recordDataSQLPost, recordDataSQLFounders, createTable
 
-from tools.slack import Slack_Founders_Info, Slack_Job_Post_Info
+from tools.slack import Slack_Founders_Info, Slack_Job_Post_Info, DividePost
 
 def CompanyName(driver):
     try:company_name = driver.find_element(By.CLASS_NAME, 'company-name').text
@@ -93,6 +93,10 @@ def CollectInfo_Y_Combinator(driver, url):
     createTable()
     
     driver.get(url);time.sleep(3)
+    
+
+    #Разделитель в slack
+    DividePost()
 
     company_name = CompanyName(driver)
     site = SiteCompany(driver)
