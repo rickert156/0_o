@@ -1,2 +1,3 @@
 ProfileChrome/
 venv/
+*/__pycache__/*
